@@ -1,9 +1,21 @@
 import os
+from os import environ
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 import pprint
 from time import sleep
+import tweepy
+
+CONSUMER_API_KEY = environ['CONSUMER_API_KEY']
+CONSUMER_API_SECRET_KEY = environ['CONSUMER_API_SECRET_KEY']
+ACCESS_TOKEN = environ['ACCESS_TOKEN']
+ACCESS_SECRET_TOKEN = environ['ACCESS_SECRET_TOKEN']
+
+
+auth = tweepy.OAuthHandler(CONSUMER_API_KEY, CONSUMER_API_SECRET_KEY)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET_TOKEN)
+api = tweepy.API(auth)
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
@@ -21,6 +33,7 @@ def main():
     credentials = flow.run_console()
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, credentials=credentials)
+    ah = 1
     while(True):
         request = youtube.videos().list(
             part="snippet,statistics",
@@ -32,8 +45,8 @@ def main():
         vid_snippet = data["snippet"]
         title = vid_snippet["title"]
         views = str(data["statistics"]["viewCount"])
-        print(title)
-        print(views)
+        status = api.update_status(ah)
+        ah += 1
         sleep(30)
     
 
