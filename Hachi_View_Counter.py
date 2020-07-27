@@ -8,12 +8,6 @@ import pprint
 from time import sleep
 import tweepy
 
-CONSUMER_API_KEY = 'g18GJktuRPlWwdh3lwBhtaSlC'
-CONSUMER_API_SECRET_KEY = 'gIJ35gtxNVbDaV1TuO80JsN538v0TEaJ7NnA7L1F0aESyJVvP6'
-ACCESS_TOKEN = '1287092605252247559-7LwQH4sQiScBKiosdxZ2GrrWbgoJR7'
-ACCESS_SECRET_TOKEN = 'J9AyAuvVdwtZ9LBYBsxl8F1QMi8SXmfGnANBNiSShkeMr'
-
-
 auth = tweepy.OAuthHandler(CONSUMER_API_KEY, CONSUMER_API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET_TOKEN)
 api = tweepy.API(auth)
